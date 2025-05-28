@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora LP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Programación Lineal (PuLP)</h1>
+
+    <form action="/resolver" method="post">
+        <label>Tipo de problema:</label><br>
+        <input type="radio" name="tipo" value="max" checked> Maximizar
+        <input type="radio" name="tipo" value="min"> Minimizar
+        <br><br>
+
+        <label>Coeficientes de la función objetivo (separados por espacio):</label><br>
+        <input type="text" name="objetivo" placeholder="Ej: 3 5" required><br><br>
+
+        <label>Restricciones (una por línea, separadas por espacio):</label><br>
+        <textarea name="restricciones" rows="6" required placeholder="Ejemplo:
+1 2
+3 1"></textarea><br><br>
+
+        <label>Signos de las restricciones (uno por línea):</label><br>
+        <textarea name="signos" rows="6" required placeholder="Ejemplo:
+<=
+<="></textarea><br><br>
+
+        <label>RHS (lado derecho de las restricciones, uno por línea):</label><br>
+        <textarea name="rhs" rows="6" required placeholder="Ejemplo:
+10
+15"></textarea><br><br>
+
+        <input type="submit" value="Resolver">
+    </form>
+</body>
+</html>

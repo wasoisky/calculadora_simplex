@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado</title>
+</head>
+<body>
+    <h2>Resultado</h2>
+    <p><strong>Estado:</strong> {{ resultado.estado }}</p>
+    <p><strong>Valor óptimo:</strong> {{ resultado.funcion_objetivo }}</p>
+
+    <h3>Variables:</h3>
+    <ul>
+        {% for nombre, valor in resultado.variables.items() %}
+        <li>{{ nombre }} = {{ valor }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Modelo LP generado:</h3>
+    <pre>{{ modelo_lp }}</pre>
+
+    <br><a href="/">← Volver</a>
+</body>
+</html>
