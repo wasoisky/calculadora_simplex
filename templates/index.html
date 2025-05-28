@@ -2,56 +2,65 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora LP</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-        }
-        textarea, input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-        label {
-            font-weight: bold;
-        }
-        input[type="submit"] {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Calculadora de Programación Lineal (PuLP)</h1>
+    <header>
+        <h1>Calculadora de Programación Lineal (PuLP)</h1>
+    </header>
 
-    <form action="/resolver" method="post">
-        <label>Tipo de problema:</label><br>
-        <input type="radio" name="tipo" value="max" checked> Maximizar
-        <input type="radio" name="tipo" value="min"> Minimizar
-        <br><br>
+    <main>
+        <form action="/resolver" method="post">
+            <div class="form-group">
+                <label>Tipo de problema:</label><br>
+                <input type="radio" name="tipo" value="max" checked> Maximizar
+                <input type="radio" name="tipo" value="min"> Minimizar
+            </div>
 
-        <label>Coeficientes de la función objetivo (separados por espacio):</label><br>
-        <input type="text" name="objetivo" placeholder="Ej: 3 5" required><br><br>
+            <div class="form-group">
+                <label for="objetivo">Coeficientes de la función objetivo (separados por espacio):</label><br>
+                <input type="text" id="objetivo" name="objetivo" placeholder="Ej: 3 5" required>
+            </div>
 
-        <label>Restricciones (una por línea, separadas por espacio):</label><br>
-        <textarea name="restricciones" rows="6" required placeholder="Ejemplo:
+            <div class="form-group">
+                <label for="restricciones">Restricciones (una por línea, separadas por espacio):</label><br>
+                <textarea id="restricciones" name="restricciones" rows="6" required placeholder="Ejemplo:
 1 2
-3 1"></textarea><br><br>
+3 1"></textarea>
+            </div>
 
-        <label>Signos de las restricciones (uno por línea):</label><br>
-        <textarea name="signos" rows="6" required placeholder="Ejemplo:
+            <div class="form-group">
+                <label for="signos">Signos de las restricciones (uno por línea):</label><br>
+                <textarea id="signos" name="signos" rows="6" required placeholder="Ejemplo:
 <=
-<="></textarea><br><br>
+<="></textarea>
+            </div>
 
-        <label>RHS (lado derecho de las restricciones, uno por línea):</label><br>
-        <textarea name="rhs" rows="6" required placeholder="Ejemplo:
+            <div class="form-group">
+                <label for="rhs">RHS (lado derecho de las restricciones, uno por línea):</label><br>
+                <textarea id="rhs" name="rhs" rows="6" required placeholder="Ejemplo:
 10
-15"></textarea><br><br>
+15"></textarea>
+            </div>
 
-        <input type="submit" value="Resolver">
-    </form>
+            <input type="submit" value="Resolver">
+        </form>
+
+        <hr> <section class="manual-section">
+            <h2>Manual de Usuario</h2>
+            <p>Descarga nuestro manual de usuario detallado para aprender a usar la calculadora de programación lineal.</p>
+            <p>
+                <a href="docs/manual_de_usuario.pdf" download="Manual_Calculadora_LP.pdf" class="button">
+                    Descargar Manual de Usuario (PDF)
+                </a>
+            </p>
+            </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Calculadora LP. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

@@ -1,23 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Resultado</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado - Calculadora LP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h2>Resultado</h2>
-    <p><strong>Estado:</strong> {{ resultado.estado }}</p>
-    <p><strong>Valor óptimo:</strong> {{ resultado.funcion_objetivo }}</p>
+    <header>
+        <h1>Resultado de la Optimización</h1>
+    </header>
 
-    <h3>Variables:</h3>
-    <ul>
-        {% for nombre, valor in resultado.variables.items() %}
-        <li>{{ nombre }} = {{ valor }}</li>
-        {% endfor %}
-    </ul>
+    <main class="result-container">
+        <h2>Detalles del Resultado</h2>
+        <p><strong>Estado:</strong> <span class="result-value">{{ resultado.estado }}</span></p>
+        <p><strong>Valor óptimo de la función objetivo:</strong> <span class="result-value">{{ resultado.funcion_objetivo }}</span></p>
 
-    <h3>Modelo LP generado:</h3>
-    <pre>{{ modelo_lp }}</pre>
+        <h3>Variables de Decisión:</h3>
+        <ul class="variable-list">
+            {% for nombre, valor in resultado.variables.items() %}
+            <li><strong>{{ nombre }}:</strong> <span class="variable-value">{{ valor }}</span></li>
+            {% endfor %}
+        </ul>
 
-    <br><a href="/">← Volver</a>
+        <h3>Modelo de Programación Lineal Generado:</h3>
+        <pre class="lp-model-code">{{ modelo_lp }}</pre>
+
+        <div class="back-link">
+            <a href="/" class="button-back">← Volver a la Calculadora</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Calculadora LP. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

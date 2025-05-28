@@ -1,0 +1,236 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #0056b3;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.2em;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #0056b3;
+}
+
+textarea, input[type="text"] {
+    width: calc(100% - 18px); /* Restamos padding y border */
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Asegura que padding y border estén incluidos en el width */
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus, input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 30px;
+    font-size: 1.1em;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #eee;
+    margin: 40px 0;
+}
+
+.manual-section {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.manual-section h2 {
+    color: #0056b3;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.manual-section p {
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+.button {
+    display: inline-block;
+    background-color: #17a2b8;
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    background-color: #138496;
+    transform: translateY(-2px);
+}
+
+.pdf-viewer {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden; /* Asegura que el iframe no se desborde */
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: #777;
+    font-size: 0.9em;
+    border-top: 1px solid #eee;
+}
+/* --- Nuevos estilos para la página de resultados (resultado.html) --- */
+
+.result-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.result-container h2 {
+    color: #0056b3;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.result-container p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.result-container strong {
+    color: #333;
+}
+
+.result-value {
+    color: #28a745; /* Color para los valores importantes */
+    font-weight: bold;
+}
+
+.variable-list {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.variable-list li {
+    background-color: #f9f9f9;
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-left: 5px solid #007bff;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1em;
+}
+
+.variable-list li strong {
+    flex-basis: 30%; /* Da un ancho para el nombre de la variable */
+    text-align: left;
+}
+
+.variable-list li .variable-value {
+    flex-basis: 65%; /* Da un ancho para el valor */
+    text-align: right;
+    color: #0056b3; /* Un color distinto para los valores de las variables */
+    font-weight: bold;
+}
+
+
+.lp-model-code {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9em;
+    white-space: pre-wrap; /* Mantiene saltos de línea y respeta el espacio */
+    word-wrap: break-word; /* Rompe palabras largas para evitar desbordamiento */
+    margin-top: 20px;
+    max-height: 400px; /* Limita la altura del bloque de código */
+    overflow-y: auto; /* Agrega scroll si el contenido es muy largo */
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.button-back {
+    display: inline-block;
+    background-color: #6c757d; /* Un color gris para el botón de volver */
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-back:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
