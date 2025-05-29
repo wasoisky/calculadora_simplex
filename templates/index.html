@@ -3,62 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora LP</title>
+    <title>Calculadora LP - Programación Lineal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
-        <h1>Calculadora de Programación Lineal (PuLP)</h1>
+        <div class="header-content">
+            <h1>
+                Calculadora de Programación Lineal
+                <small class="subtitle">Optimiza tus modelos con PuLP de forma sencilla</small>
+            </h1>
+            <a href="{{ url_for('static', filename='docs/Manual Usuario CalculadoraPL.pdf') }}" 
+               download="Manual_Calculadora_LP.pdf" 
+               class="manual-link-header" 
+               title="Ver Manual de Usuario">
+                Manual de Usuario <span class="icon-manual">📖</span>
+            </a>
+        </div>
     </header>
 
     <main>
+        <section class="intro-section">
+            <p>Ingresa los parámetros de tu problema de programación lineal a continuación. Selecciona el tipo de problema (maximizar o minimizar) y luego proporciona los coeficientes, restricciones y límites.</p>
+        </section>
+
         <form action="/resolver" method="post">
-            <div class="form-group">
-                <label>Tipo de problema:</label><br>
-                <input type="radio" name="tipo" value="max" checked> Maximizar
-                <input type="radio" name="tipo" value="min"> Minimizar
+            <div class="form-section">
+                <h3>1. Definición del Problema</h3>
+                <div class="form-group">
+                    <label>Tipo de problema:</label><br>
+                    <input type="radio" name="tipo" value="max" checked> <label for="max">Maximizar</label>
+                    <input type="radio" name="tipo" value="min"> <label for="min">Minimizar</label>
+                    <p class="help-text">Define si quieres encontrar el valor más alto o más bajo de tu función objetivo.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="objetivo">Función Objetivo (Coeficientes):</label><br>
+                    <input type="text" id="objetivo" name="objetivo" placeholder="Ej: 3 5" required aria-describedby="objetivo-help">
+                    <p id="objetivo-help" class="help-text">Ingresa los coeficientes de las variables de tu función objetivo, separados por espacios (Ej: para 3x1 + 5x2, escribe "3 5").</p>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="objetivo">Coeficientes de la función objetivo (separados por espacio):</label><br>
-                <input type="text" id="objetivo" name="objetivo" placeholder="Ej: 3 5" required>
-            </div>
+            <div class="form-section">
+                <h3>2. Restricciones del Modelo</h3>
+                <p class="section-description">Define las limitaciones del problema. Asegúrate de que el número de coeficientes en cada restricción coincida con el número de variables de tu función objetivo.</p>
 
-            <div class="form-group">
-                <label for="restricciones">Restricciones (una por línea, separadas por espacio):</label><br>
-                <textarea id="restricciones" name="restricciones" rows="6" required placeholder="Ejemplo:
+                <div class="form-group">
+                    <label for="restricciones">Coeficientes de las Restricciones:</label><br>
+                    <textarea id="restricciones" name="restricciones" rows="5" required placeholder="Ejemplo:
 1 2
-3 1"></textarea>
-            </div>
+3 1" aria-describedby="restricciones-help"></textarea>
+                    <p id="restricciones-help" class="help-text">Ingresa los coeficientes de cada restricción. Una restricción por línea, coeficientes separados por espacios (Ej: para 1x1 + 2x2, escribe "1 2").</p>
+                </div>
 
-            <div class="form-group">
-                <label for="signos">Signos de las restricciones (uno por línea):</label><br>
-                <textarea id="signos" name="signos" rows="6" required placeholder="Ejemplo:
+                <div class="form-group">
+                    <label for="signos">Signos de las Restricciones:</label><br>
+                    <textarea id="signos" name="signos" rows="5" required placeholder="Ejemplo:
 <=
-<="></textarea>
-            </div>
+>=" aria-describedby="signos-help"></textarea>
+                    <p id="signos-help" class="help-text">Ingresa el tipo de relación para cada restricción. Una por línea. Puedes usar `<=`, `>=` o `=`. (Ej: para menor o igual, escribe "<=").</p>
+                </div>
 
-            <div class="form-group">
-                <label for="rhs">RHS (lado derecho de las restricciones, uno por línea):</label><br>
-                <textarea id="rhs" name="rhs" rows="6" required placeholder="Ejemplo:
+                <div class="form-group">
+                    <label for="rhs">Lado Derecho (RHS) de las Restricciones:</label><br>
+                    <textarea id="rhs" name="rhs" rows="5" required placeholder="Ejemplo:
 10
-15"></textarea>
+15" aria-describedby="rhs-help"></textarea>
+                    <p id="rhs-help" class="help-text">Ingresa el valor numérico del lado derecho para cada restricción. Uno por línea (Ej: "10").</p>
+                </div>
             </div>
 
-            <input type="submit" value="Resolver">
+            <div class="submit-group">
+                <input type="submit" value="Resolver Problema" class="submit-button">
+                <p class="help-text">Haz clic para calcular la solución óptima de tu problema de programación lineal.</p>
+            </div>
         </form>
 
-        <hr> <section class="manual-section">
-            <h2>Manual de Usuario</h2>
-            <p>Descarga nuestro manual de usuario detallado para aprender a usar la calculadora de programación lineal.</p>
-            <p>
-                <a href="{{ url_for('static', filename='docs/Manual Usuario CalculadoraPL.pdf') }}" 
-                   download="Manual_Calculadora_LP.pdf" 
-                   class="button">
-                    Descargar Manual de Usuario (PDF)
-                </a>
-            </p>
-            </section>
     </main>
 
     <footer>

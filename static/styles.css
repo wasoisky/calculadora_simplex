@@ -1,10 +1,20 @@
+/* --- ESTILOS GENERALES Y LAYOUT --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 20px;
     background-color: #f4f7f6;
     color: #333;
+    margin: 0;
+    padding: 0; /* Asegura que no haya padding global en el body */
     line-height: 1.6;
+}
+
+main {
+    max-width: 900px; /* Ancho máximo para el contenido principal */
+    margin: 30px auto; /* Centra el main y le da margen superior/inferior */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 header {
@@ -12,130 +22,234 @@ header {
     color: white;
     padding: 20px;
     text-align: center;
-    border-radius: 8px;
+    border-bottom: 5px solid #004085; /* Borde más distintivo */
     margin-bottom: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Apila los elementos (título y manual) verticalmente */
+}
+
+.header-content {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el h1 y el enlace */
+    gap: 20px; /* Espacio entre el título y el enlace del manual */
+    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea en pantallas pequeñas */
+    justify-content: center; /* Centra el contenido si se envuelve */
 }
 
 h1 {
     margin: 0;
-    font-size: 2.2em;
+    font-size: 2.2em; /* Puedes ajustar este tamaño si quieres el título principal más grande */
+    padding-right: 10px; /* Espacio entre el título y el manual en pantallas grandes (aunque gap lo maneja) */
+    letter-spacing: -0.5px; /* Ajuste para que se vea más moderno */
+    line-height: 1.2; /* Ajusta la altura de línea para el título */
 }
 
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px 30px;
-    background-color: #ffffff;
+/* Estilos para el subtítulo dentro del h1 */
+h1 .subtitle {
+    display: block; /* Hace que el subtítulo aparezca en una nueva línea debajo del título */
+    font-size: 0.5em; /* Tamaño de fuente relativo al h1, hazlo más pequeño */
+    color: rgba(255, 255, 255, 0.8); /* Un color blanco más tenue */
+    margin-top: 5px; /* Pequeño espacio entre el título y el subtítulo */
+    font-weight: normal; /* Asegura que no esté en negrita */
+    letter-spacing: 0; /* Sin espaciado de letras adicional */
+}
+
+/* Estilos para el enlace del manual en el header (pequeño y discreto) */
+.manual-link-header {
+    background-color: #17a2b8;
+    color: white;
+    padding: 6px 12px; /* Más compacto */
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9em; /* Más pequeño aún */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex; /* Para alinear el texto y el icono */
+    align-items: center;
+    gap: 4px; /* Espacio entre "Manual" y el icono */
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Pequeña sombra */
+}
+
+.manual-link-header:hover {
+    background-color: #138496;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.icon-manual {
+    font-size: 1em; /* Ajusta el tamaño del icono */
+}
+
+/* --- SECCIONES INTRODUCTORIAS --- */
+.intro-section {
+    background-color: #e9f7ef; /* Un color suave para la introducción */
+    border-left: 5px solid #28a745; /* Barra lateral para destacar */
+    padding: 20px 25px;
+    margin-bottom: 35px;
+    border-radius: 5px;
+    color: #386147;
+    font-size: 1.1em;
+    line-height: 1.5;
+}
+
+/* --- ESTRUCTURA DEL FORMULARIO Y GRUPOS --- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Espacio entre secciones del formulario */
+}
+
+.form-section {
+    border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    background-color: #fdfdfd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-section h3 {
+    color: #0056b3;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+    border-bottom: 2px solid #eee; /* Separador sutil */
+    padding-bottom: 10px;
+}
+
+.section-description {
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 25px;
+    font-style: italic;
 }
 
 .form-group {
     margin-bottom: 20px;
 }
 
-label {
+.form-group label {
     display: block;
-    font-weight: bold;
     margin-bottom: 8px;
-    color: #0056b3;
+    font-weight: bold;
+    color: #444; /* Color de label más oscuro para mejor contraste */
+    font-size: 1.05em;
 }
 
-textarea, input[type="text"] {
-    width: calc(100% - 18px); /* Restamos padding y border */
-    padding: 10px;
-    font-size: 1em;
+/* Estilos para el texto de ayuda */
+.help-text {
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 5px;
+    padding-left: 5px; /* Ligera indentación */
+    line-height: 1.4;
+}
+
+/* Inputs y Textareas */
+input[type="text"],
+textarea {
+    width: calc(100% - 20px); /* Ajusta el ancho para el padding */
+    padding: 12px 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Asegura que padding y border estén incluidos en el width */
-    transition: border-color 0.3s ease;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-textarea:focus, input[type="text"]:focus {
+input[type="text"]:focus,
+textarea:focus {
     border-color: #007bff;
-    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none; /* Eliminar el contorno por defecto del navegador */
 }
 
+/* Radio buttons */
 input[type="radio"] {
     margin-right: 5px;
 }
 
-input[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 12px 20px;
-    margin-top: 30px;
-    font-size: 1.1em;
-    color: white;
-    background-color: #28a745;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+input[type="radio"] + label {
+    display: inline-block; /* Para alinear el texto con el radio button */
+    margin-right: 15px;
+    font-weight: normal; /* No negrita para las opciones de radio */
 }
 
-input[type="submit"]:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-}
-
-hr {
-    border: 0;
-    height: 1px;
-    background-color: #eee;
-    margin: 40px 0;
-}
-
-.manual-section {
-    padding-top: 20px;
+/* --- BOTÓN DE ENVIAR --- */
+.submit-group {
     text-align: center;
+    margin-top: 30px;
 }
 
-.manual-section h2 {
-    color: #0056b3;
-    margin-bottom: 15px;
-    font-size: 1.8em;
-}
-
-.manual-section p {
-    margin-bottom: 25px;
-    font-size: 1.1em;
-}
-
-.button {
-    display: inline-block;
-    background-color: #17a2b8;
+.submit-button {
+    background-color: #007bff; /* Un azul principal para la acción */
     color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 5px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
     font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-.button:hover {
-    background-color: #138496;
+.submit-button:hover {
+    background-color: #0056b3;
     transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
 }
 
-.pdf-viewer {
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden; /* Asegura que el iframe no se desborde */
-}
-
+/* --- FOOTER --- */
 footer {
     text-align: center;
-    margin-top: 40px;
     padding: 20px;
+    margin-top: 40px;
     color: #777;
     font-size: 0.9em;
     border-top: 1px solid #eee;
 }
-/* --- Nuevos estilos para la página de resultados (resultado.html) --- */
 
+/* --- MEDIA QUERIES (Para pantallas pequeñas) --- */
+@media (max-width: 768px) {
+    main {
+        margin: 20px auto;
+        padding: 20px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    h1 .subtitle {
+        font-size: 0.45em; /* Ajuste del subtítulo para pantallas pequeñas */
+    }
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .manual-link-header {
+        font-size: 0.85em;
+        padding: 5px 10px;
+    }
+    .form-section {
+        padding: 15px;
+    }
+    .form-section h3 {
+        font-size: 1.4em;
+    }
+    .submit-button {
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
+}
+
+/* --- ESTILOS PARA LA PÁGINA DE RESULTADOS (resultado.html) --- */
+/* Estas reglas se mantienen porque son para 'resultado.html' y no para 'index.html'.
+   No las eliminamos a menos que se confirme que no hay otra página que las use. */
 .result-container {
     max-width: 800px;
     margin: 30px auto;
@@ -198,7 +312,6 @@ footer {
     color: #0056b3; /* Un color distinto para los valores de las variables */
     font-weight: bold;
 }
-
 
 .lp-model-code {
     background-color: #f0f0f0;
