@@ -52,7 +52,9 @@
             <h2>Manual de Usuario</h2>
             <p>Descarga nuestro manual de usuario detallado para aprender a usar la calculadora de programación lineal.</p>
             <p>
-                <a href="docs/manual_de_usuario.pdf" download="Manual_Calculadora_LP.pdf" class="button">
+                <a href="{{ url_for('static', filename='docs/Manual Usuario CalculadoraPL.pdf') }}" 
+                   download="Manual_Calculadora_LP.pdf" 
+                   class="button">
                     Descargar Manual de Usuario (PDF)
                 </a>
             </p>
