@@ -411,3 +411,112 @@ p.error-message {
 }
 
 /* ... El resto de tus estilos ... */
+/* En static/styles.css */
+.help-text {
+    font-size: 0.9em;
+    color: #666; /* Un gris más suave */
+    margin-bottom: 5px; /* Espacio debajo de la descripción */
+    line-height: 1.4;
+}
+
+/* Para los ejemplos multilínea en las restricciones */
+.help-text code {
+    display: block; /* Para que cada línea del ejemplo esté en su propia línea */
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-left: 3px solid #007bff; /* Una barra de color para destacar */
+    margin-top: 5px;
+    font-family: monospace;
+    white-space: pre-wrap; /* Mantiene los saltos de línea y espacios */
+}
+/* --- Estilos para la Nueva Sección de Ejemplo de Restricción --- */
+.restriction-example-block {
+    background-color: #f8f9fa; /* Fondo claro para el bloque */
+    border: 1px solid #e0e0e0;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Sombra más pronunciada */
+    text-align: center;
+}
+
+.restriction-example-block h3 {
+    color: #343a40; /* Color de texto oscuro para el título */
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+
+.restriction-example-block .example-explanation {
+    font-size: 1em;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.restriction-example-block .example-components {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Espacio entre los componentes */
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
+}
+
+/* Colores para las partes del ejemplo */
+.example-coefs-value {
+    color: #dc3545; /* Rojo de Bootstrap danger */
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 8px 15px;
+    border: 2px solid #dc3545;
+    border-radius: 5px;
+    background-color: rgba(220, 53, 69, 0.05); /* Un fondo muy ligero para el texto rojo */
+}
+
+.example-sign-value {
+    color: #fff; /* Texto blanco */
+    background-color: #28a745; /* Verde de Bootstrap success */
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+    min-width: 80px; /* Asegura un ancho mínimo para el signo */
+    display: flex; /* Para centrar el texto vertical y horizontalmente */
+    justify-content: center;
+    align-items: center;
+}
+
+.example-rhs-value {
+    color: #6f42c1; /* Morado de Bootstrap purple */
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 8px 15px;
+    border: 2px solid #6f42c1;
+    border-radius: 5px;
+    background-color: rgba(111, 66, 193, 0.05); /* Un fondo muy ligero para el texto morado */
+}
+
+/* Estilos para las etiquetas de los campos de entrada para que coincidan con los colores */
+.color-coefs-label {
+    color: #dc3545; /* Rojo */
+    font-weight: bold;
+}
+
+.color-sign-label {
+    color: #28a745; /* Amarillo-verde */
+    font-weight: bold;
+}
+
+.color-rhs-label {
+    color: #6f42c1; /* Morado */
+    font-weight: bold;
+}
+
+/* Asegurar que las explicaciones generales de la sección no sean "help-text" */
+.section-description {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}

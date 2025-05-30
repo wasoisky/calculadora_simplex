@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora LP - Programación Lineal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
+    </head>
 <body>
     <header>
         <div class="header-content">
@@ -13,9 +13,9 @@
                 Calculadora de Programación Lineal
                 <small class="subtitle">Optimiza tus modelos con PuLP de forma sencilla</small>
             </h1>
-            <a href="{{ url_for('static', filename='docs/Manual Usuario CalculadoraPL.pdf') }}" 
-               download="Manual_Calculadora_LP.pdf" 
-               class="manual-link-header" 
+            <a href="{{ url_for('static', filename='docs/Manual Usuario CalculadoraPL.pdf') }}"
+               download="Manual_Calculadora_LP.pdf"
+               class="manual-link-header"
                title="Ver Manual de Usuario">
                 Manual de Usuario <span class="icon-manual">📖</span>
             </a>
@@ -30,46 +30,92 @@
         <form action="/resolver" method="post">
             <div class="form-section">
                 <h3>1. Definición del Problema</h3>
+
                 <div class="form-group">
-                    <label>Tipo de problema:</label><br>
-                    <input type="radio" name="tipo" value="max" checked> <label for="max">Maximizar</label>
-                    <input type="radio" name="tipo" value="min"> <label for="min">Minimizar</label>
+                    <label>Tipo de problema:</label>
                     <p class="help-text">Define si quieres encontrar el valor más alto o más bajo de tu función objetivo.</p>
+                    <input type="radio" name="tipo" value="max" id="max_radio" checked> <label for="max_radio">Maximizar</label>
+                    <input type="radio" name="tipo" value="min" id="min_radio"> <label for="min_radio">Minimizar</label>
                 </div>
 
                 <div class="form-group">
-                    <label for="objetivo">Función Objetivo (Coeficientes):</label><br>
+                    <label for="objetivo">Función Objetivo (Coeficientes):</label>
+                    <p class="help-text">
+                        Ingresa los coeficientes de las variables de tu función objetivo, separados por espacios. <br>
+                        Por ejemplo, para una función objetivo como <strong>3 x1 + 5 x2</strong>, escribirías: <br>
+                        <code>3 5</code>
+                    </p>
                     <input type="text" id="objetivo" name="objetivo" placeholder="Ej: 3 5" required aria-describedby="objetivo-help">
-                    <p id="objetivo-help" class="help-text">Ingresa los coeficientes de las variables de tu función objetivo, separados por espacios (Ej: para 3x1 + 5x2, escribe "3 5").</p>
                 </div>
             </div>
 
+            <section class="restriction-example-block">
+                <h3>Ejemplo de una Restricción:</h3>
+                <p class="example-explanation">Así es como una restricción se compone de sus tres partes:</p>
+                <div class="example-components">
+                    <span class="example-coefs-value">100 x1 + 200 x2</span>
+                    <span class="example-sign-value">&lt;=</span>
+                    <span class="example-rhs-value">1500</span>
+                </div>
+                
+            </section>
             <div class="form-section">
                 <h3>2. Restricciones del Modelo</h3>
-                <p class="section-description">Define las limitaciones del problema. Asegúrate de que el número de coeficientes en cada restricción coincida con el número de variables de tu función objetivo.</p>
+                <p class="help-text">
+                    Define las limitaciones de tu problema. Cada restricción se compone de coeficientes de variables, un signo de relación y un valor del lado derecho (RHS).
+                    Asegúrate de que el número de coeficientes en cada restricción coincida con el número de variables de tu función objetivo.
+                </p>
 
                 <div class="form-group">
-                    <label for="restricciones">Coeficientes de las Restricciones:</label><br>
-                    <textarea id="restricciones" name="restricciones" rows="5" required placeholder="Ejemplo:
-1 2
-3 1" aria-describedby="restricciones-help"></textarea>
-                    <p id="restricciones-help" class="help-text">Ingresa los coeficientes de cada restricción. Una restricción por línea, coeficientes separados por espacios (Ej: para 1x1 + 2x2, escribe "1 2").</p>
+                    <label for="restricciones" class="color-coefs-label" style="color:red" >Coeficientes de las Restricciones:</label>
+
+                    <p class="help-text">
+                        Ingresa los coeficientes numéricos para <strong>cada restricción</strong>, una por línea.
+                        Los coeficientes de cada variable deben ir separados por <strong>espacios</strong>. <br>
+                        <br>
+                        <strong>Formato Sugerido:</strong> <br>
+                        <code>[100 x1] [200 x2] [etc x3] ...</code> <br>
+                        
+                      
+                    </p>
+                    <textarea id="restricciones" name="restricciones" rows="5" required placeholder="Ejemplo:&#10;1 2&#10;3 1" aria-describedby="restricciones-help"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="signos">Signos de las Restricciones:</label><br>
-                    <textarea id="signos" name="signos" rows="5" required placeholder="Ejemplo:
-<=
->=" aria-describedby="signos-help"></textarea>
-                    <p id="signos-help" class="help-text">Ingresa el tipo de relación para cada restricción. Una por línea. Puedes usar `<=`, `>=` o `=`. (Ej: para menor o igual, escribe "<=").</p>
+                    <label for="signos" class="color-sign-label" style="color:yellowgreen">Signos de las Restricciones:</label>
+                    <p class="help-text">
+                        Ingresa el tipo de relación para <strong>cada restricción</strong>, uno por línea. <br>
+                        Las opciones válidas son:
+                        <ul>
+                            <li><code>&lt;=</code> (menor o igual que)</li>
+                            <li><code>&gt;=</code> (mayor o igual que)</li>
+                            <li><code>=</code> (igual a)</li>
+                        </ul>
+                        Asegúrate de que el número de signos que ingreses coincida exactamente con el número de filas de restricciones que definiste en el campo anterior. <br>
+                        <br>
+                        <strong>Ejemplo:</strong><br>
+                        Si tienes tres restricciones, podrías escribir:
+                        <pre>&lt;=
+&gt;=
+&gt;=</pre>
+                    </p>
+                    <textarea id="signos" name="signos" rows="5" required placeholder="Ejemplo:&#10;<=&#10;>=" aria-describedby="signos-help"></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="rhs">Lado Derecho (RHS) de las Restricciones:</label><br>
-                    <textarea id="rhs" name="rhs" rows="5" required placeholder="Ejemplo:
-10
-15" aria-describedby="rhs-help"></textarea>
-                    <p id="rhs-help" class="help-text">Ingresa el valor numérico del lado derecho para cada restricción. Uno por línea (Ej: "10").</p>
+                    <label for="rhs" class="color-rhs-label" style="color:blueviolet">Lado Derecho (RHS) de las Restricciones:</label>
+                    <p class="help-text">
+                        Ingresa el valor numérico del lado derecho (Right Hand Side) para <strong>cada restricción</strong>, uno por línea. <br>
+                        Este es el límite o valor al que se compara la expresión de la restricción. <br>
+                        Asegúrate de que el número de valores RHS coincida con el número de restricciones y signos que ingresaste. <br>
+                        <br>
+                        <strong>Ejemplo:</strong><br>
+                        Si tus tres restricciones tienen límites de 10, 15 y 12, escribirías:
+                        <pre>10
+15
+12</pre>
+                    </p>
+                    <textarea id="rhs" name="rhs" rows="5" required placeholder="Ejemplo:&#10;10&#10;15" aria-describedby="rhs-help"></textarea>
                 </div>
             </div>
 
