@@ -3,31 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado - Calculadora LP</title>
+    <title>Resultado de la Solución PL</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
-        <h1>Resultado de la Optimización</h1>
+        <div class="header-content">
+            <h1>
+                Resultado de la Solución
+                <small class="subtitle">Análisis de tu problema de Programación Lineal</small>
+            </h1>
+        </div>
     </header>
 
-    <main class="result-container">
-        <h2>Detalles del Resultado</h2>
-        <p><strong>Estado:</strong> <span class="result-value">{{ resultado.estado }}</span></p>
-        <p><strong>Valor óptimo de la función objetivo:</strong> <span class="result-value">{{ resultado.funcion_objetivo }}</span></p>
+    <main>
+        <div class="result-container">
+            {# Mostramos el error si existe en el diccionario 'resultado' #}
+            {% if resultado.error %}
+                <div class="error-message-box">
+                    <h3>¡Error!</h3>
+                    <p>{{ resultado.error }}</p>
+                    <p>Por favor, revisa tus entradas y el formato de los datos.</p>
+                </div>
+            {# Si no hay un error explícito, entonces intentamos mostrar el estado de la solución #}
+            {% else %}
+                <h2>Estado de la Solución: <span class="result-value">{{ resultado.estado }}</span></h2>
 
-        <h3>Variables de Decisión:</h3>
-        <ul class="variable-list">
-            {% for nombre, valor in resultado.variables.items() %}
-            <li><strong>{{ nombre }}:</strong> <span class="variable-value">{{ valor }}</span></li>
-            {% endfor %}
-        </ul>
+                {# Mensajes para estados no óptimos (Infeasible, Unbounded, etc.) #}
+                {% if resultado.mensaje %}
+                    <p class="error-message"><strong>Mensaje:</strong> {{ resultado.mensaje }}</p>
+                {% endif %}
 
-        <h3>Modelo de Programación Lineal Generado:</h3>
-        <pre class="lp-model-code">{{ modelo_lp }}</pre>
+                {# Solo mostramos los detalles de la solución si el estado es Optimal #}
+                {% if resultado.estado == "Optimal" %}
+                    <p><strong>Valor Óptimo de la Función Objetivo:</strong> <span class="result-value">{{ "%.4f"|format(resultado.funcion_objetivo) }}</span></p>
 
-        <div class="back-link">
-            <a href="/" class="button-back">← Volver a la Calculadora</a>
+                    {# Mostrar iteraciones y tiempo si están disponibles #}
+                    {% if resultado.num_iteraciones != "N/A" %}
+                        <p><strong>Iteraciones del Solucionador:</strong> <span class="result-value">{{ resultado.num_iteraciones }}</span></p>
+                    {% endif %}
+                    {% if resultado.tiempo_solver != "N/A" %}
+                        <p><strong>Tiempo de Solución (Wallclock):</strong> <span class="result-value">{{ resultado.tiempo_solver }}</span></p>
+                    {% endif %}
+
+                    <h3>Valores de las Variables:</h3>
+                    <ul class="variable-list">
+                        {% for nombre, valor in resultado.variables.items() %}
+                            <li>
+                                <strong>{{ nombre }}:</strong>
+                                <span class="variable-value">{{ "%.4f"|format(valor) }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {# Mostrar el modelo LP generado si existe el contenido #}
+                {% if modelo_lp_contenido %}
+                    <h3>Modelo de Programación Lineal Generado:</h3>
+                    <pre class="lp-model-code">{{ modelo_lp_contenido }}</pre>
+                {% endif %}
+
+                {# Puedes optar por NO mostrar el log completo por defecto. #}
+                {# Si quieres mostrarlo, descomenta el siguiente bloque: #}
+                {#
+                {% if resultado.log %}
+                <div class="log-section">
+                    <h3>Log Completo del Solucionador:</h3>
+                    <pre class="solver-log-output">{{ resultado.log }}</pre>
+                    <p class="help-text">Este es el registro completo de la ejecución del algoritmo de optimización.</p>
+                </div>
+                {% endif %}
+                #}
+            {% endif %} {# Cierre del if resultado.error #}
+
+            <div class="back-link">
+                <a href="/" class="button-back">← Volver a la Calculadora</a>
+            </div>
         </div>
     </main>
 
